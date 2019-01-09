@@ -6,6 +6,7 @@
     for an arbitrary list of strings.
 
 """
+from collections import defaultdict
 import sys
 
 
@@ -28,18 +29,15 @@ def find_anagrams(words):
 
         Return a dictionary with keys that are alphabetized words and values
         that are all words that, when alphabetized, match the key.
-
         Example:
 
         >>> print find_anagrams(['cat', 'dog', 'act'])
         {'dgo': ['dog'], 'act': ['cat', 'act']}
 
     """
-    anagrams = {
-        alphabetize(word): [
-            w for w in words
-            if alphabetize(w) == alphabetize(word)]
-        for word in words}
+    anagrams = defaultdict(list)
+    for word in words:
+        anagrams[alphabetize(word)].append(word)
     return anagrams
 
 
